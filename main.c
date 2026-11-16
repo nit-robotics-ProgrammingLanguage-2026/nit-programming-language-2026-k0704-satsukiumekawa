@@ -1,3 +1,36 @@
 #include <stdio.h>
-int f(int x){static int s=0;s+=x;return s;}
-int main(void){int n,a=0;scanf("%d",&n);if(n<1||n>10){printf("NG");return 0;}for(int i=1;i<=n;i++){a=f(i*2);}printf("%d",a);return 0;}
+
+/* 累積値を保持して返す関数 */
+int calculate_sum(int value)
+{
+    /* static変数は関数終了後も値を保持する */
+    static int total = 0;
+
+    total += value;
+
+    return total;
+}
+
+int main(void)
+{
+    int input_number;
+    int answer = 0;
+
+    scanf("%d", &input_number);
+
+    if (input_number < 1 || input_number > 10)
+    {
+        printf("NG");
+        return 0;
+    }
+
+    /* 2, 4, 6, ... , 2n を順に加算する */
+    for (int current_number = 1; current_number <= input_number; current_number++)
+    {
+        answer = calculate_sum(current_number * 2);
+    }
+
+    printf("%d", answer);
+
+    return 0;
+}
